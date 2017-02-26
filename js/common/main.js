@@ -31,62 +31,71 @@ requirejs.config({
 		}
 	}
 });
-requirejs(['jquery','bootstrap','common']);
+require(['jquery','bootstrap','common']);
 
 //根据URL中路径名加载不用的js文件
 (function (window) {
 	var pathname = window.location.pathname;
+	require(['jquery','jqueryCookie'],function ($, undefined) {
+		console.log($.cookie('PHPSESSID'));
+		//如果是登录页面，根据cookie判断是否登录过
+		if(pathname === '/html/home/login.html' && $.cookie('PHPSESSID')){
+			window.location.href = '/';
 
-	
-	switch (pathname) {
-		/*------------crouse-------------------*/
-		case "/html/course/add.html" :
-			require(['courseAdd']);
-			break;
-		case "/html/course/add_step1.html" :
-			require(['addStep1']);
-			break;
-		case "/html/course/add_step2.html" :
-			require(['addStep2']);
-			break;
-		case "/html/course/add_step3.html" :
-			require(['addStep3']);
-			break;
-		case "/html/course/category.html" :
-			require(['category']);
-			break;
-		case "/html/course/category_add.html" :
-			require(['categoryAdd']);
-			break;
-		case "/html/course/list.html" :
-			require(['courseList']);
-			break;
-		case "/html/course/topic.html" :
-			require(['topic']);
-			break;
-		/*----------home-------------*/
-		case "/html/home/login.html" :
-			require(['login']);
-			break;
-		case "/html/home/repass.html" :
-			require(['repass']);
-			break;
-		case "/html/home/settings.html" :
-			require(['settings']);
-			break;
-		/*--------------teacher-------------*/
-		case "/html/teacher/add.html" :
-			require(['teacherAdd']);
-			break;
-		case "/html/teacher/list.html" :
-			require(['teacherList']);
-			break;
-		/*----------------user-----------------*/
-		case "/html/user/list.html" :
-			require(['userList']);
-			break;
-		case "/html/user/profile.html" :
-			require(['userProfile']);
-			break;
-	}
+		}else if(pathname !== '/html/home/login.html' && !$.cookie('PHPSESSID')) {
+			window.location.href = '/html/home/login.html';
+		}
+		switch (pathname) {
+			/*------------crouse-------------------*/
+			case "/html/course/add.html" :
+				require(['courseAdd']);
+				break;
+			case "/html/course/add_step1.html" :
+				require(['addStep1']);
+				break;
+			case "/html/course/add_step2.html" :
+				require(['addStep2']);
+				break;
+			case "/html/course/add_step3.html" :
+				require(['addStep3']);
+				break;
+			case "/html/course/category.html" :
+				require(['category']);
+				break;
+			case "/html/course/category_add.html" :
+				require(['categoryAdd']);
+				break;
+			case "/html/course/list.html" :
+				require(['courseList']);
+				break;
+			case "/html/course/topic.html" :
+				require(['topic']);
+				break;
+			/*----------home-------------*/
+			case "/html/home/login.html" :
+				require(['login']);
+				break;
+			case "/html/home/repass.html" :
+				require(['repass']);
+				break;
+			case "/html/home/settings.html" :
+				require(['settings']);
+				break;
+			/*--------------teacher-------------*/
+			case "/html/teacher/add.html" :
+				require(['teacherAdd']);
+				break;
+			case "/html/teacher/list.html" :
+				require(['teacherList']);
+				break;
+			/*----------------user-----------------*/
+			case "/html/user/list.html" :
+				require(['userList']);
+				break;
+			case "/html/user/profile.html" :
+				require(['userProfile']);
+				break;
+		}
+	})
+
 })(window);
