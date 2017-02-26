@@ -5,9 +5,10 @@ requirejs.config({
 	baseUrl: '/',
 	paths: {
 		jquery: './lib/jquery/jquery.min',
+		jqueryCookie: './lib/jquery-cookie/jquery.cookie',
 		bootstrap: './lib/bootstrap/js/bootstrap',
 
-		index: '/js/index',
+		common: '/js/common/common',
 		courseAdd: '/js/course/add',
 		addStep1: '/js/course/add_step1',
 		addStep2: '/js/course/add_step2',
@@ -30,17 +31,14 @@ requirejs.config({
 		}
 	}
 });
-requirejs(['jquery','bootstrap']);
+requirejs(['jquery','bootstrap','common']);
 
 //根据URL中路径名加载不用的js文件
 (function (window) {
-	switch (window.location.pathname) {
-		case "/" :
-			require(['index']);
-			break;
-		case "/index.html" :
-			require(['index']);
-			break;
+	var pathname = window.location.pathname;
+
+	
+	switch (pathname) {
 		/*------------crouse-------------------*/
 		case "/html/course/add.html" :
 			require(['courseAdd']);
