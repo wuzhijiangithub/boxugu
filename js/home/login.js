@@ -7,7 +7,6 @@ define(['jquery','jqueryCookie','nprogress'],function ($, undefined, NProgress) 
 	if(userInfo){
 		var name = JSON.parse(userInfo).tc_name;
 		var avatar = JSON.parse(userInfo).tc_avatar? JSON.parse(userInfo).tc_avatar: '/img/default.png';
-		console.log(tc_avatar+'123');
 		$('#tc_name').val(name);
 		$('#tc_avatar').attr('src', avatar);
 	}
@@ -25,10 +24,14 @@ define(['jquery','jqueryCookie','nprogress'],function ($, undefined, NProgress) 
 				}
 
 			},
+			error: function () {
+				console.log('用户名或者密码不存在');
+			}
 
 		});
 		return false;
 
 	});
+	/*进度条加载完成*/
 	NProgress.done();
 });

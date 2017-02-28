@@ -9,6 +9,7 @@ requirejs.config({
 		jqueryCookie: './lib/jquery-cookie/jquery.cookie',
 		bootstrap: './lib/bootstrap/js/bootstrap',
 		nprogress: './lib/nprogress/nprogress',
+		template: './lib/artTemplate-3.0.1/template',
 
 		//自己写的js文件
 		index: './js/index',
@@ -44,7 +45,6 @@ require(['jquery','bootstrap']);
 (function (window) {
 	var pathname = window.location.pathname;
 	require(['jquery','jqueryCookie'],function ($, undefined) {
-		console.log($.cookie('PHPSESSID'));
 		//如果是登录页面，根据cookie判断是否登录过
 		if(pathname === '/html/home/login.html' && $.cookie('PHPSESSID')){
 			window.location.href = '/';

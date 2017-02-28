@@ -28,5 +28,11 @@ define(['jquery','jqueryCookie'],function ($) {
 	// 左侧导航定位&多选项下拉显示
 	var pathname = window.location.pathname;
 	$('.navs a').removeClass('active').filter('[href="'+pathname+'"]').addClass('active').parents('ul').show();
-
+	
+	/*发送ajax请求时显示loading正在加载动画*/
+	$(document).ajaxStart(function () {
+		$('.overlay').show();
+	}).ajaxStop(function () {
+		$('.overlay').hide();
+	});
 });
