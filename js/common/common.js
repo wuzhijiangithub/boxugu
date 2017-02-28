@@ -14,10 +14,19 @@ define(['jquery','jqueryCookie'],function ($) {
 		});
 	});
 	//显示左侧边栏头像和用户名
-	var userInfo = JSON.parse($.cookie('userInfo'));
-	console.log(userInfo);
+	try {
+		var userInfo = JSON.parse($.cookie('userInfo'));
+	}catch(e) {
+		var userInfo = {};
+	}
+
 	var avatar = userInfo.tc_avatar ? userInfo.tc_avatar: '/img/default.png';
-	var name = userInfo.tc_name? userInfo.tc_name : '用户名不存在';
+	var name = userInfo.tc_name? userInfo.tc_name : '该用户未设置用户名';
 	$('.aside .profile h4').text(name);
 	$('.aside .profile img').attr('src', avatar);
+
+	// 左侧导航定位&多选项下拉显示
+	var pathname = window.location.pathname;
+	$('.navs a').removeClass('active').filter('[href="'+pathname+'"]').addClass('active').parents('ul').show();
+
 });
