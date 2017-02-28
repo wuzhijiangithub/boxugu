@@ -1,7 +1,7 @@
 /**
  * Created by MF on 2017/2/25.
  */
-define(['jquery','jqueryCookie'],function ($) {
+define(['jquery','jqueryCookie','nprogress'],function ($, undefined, NProgress) {
 	//根据cookie中用户信息显示对应的头像和用户名
 	var userInfo = $.cookie('userInfo');
 	if(userInfo){
@@ -30,5 +30,5 @@ define(['jquery','jqueryCookie'],function ($) {
 		return false;
 
 	});
-
+	NProgress.done();
 });

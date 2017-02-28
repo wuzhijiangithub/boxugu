@@ -4,10 +4,14 @@
 requirejs.config({
 	baseUrl: '/',
 	paths: {
+		/*第三方插件库*/
 		jquery: './lib/jquery/jquery.min',
 		jqueryCookie: './lib/jquery-cookie/jquery.cookie',
 		bootstrap: './lib/bootstrap/js/bootstrap',
+		nprogress: './lib/nprogress/nprogress',
 
+		//自己写的js文件
+		index: './js/index',
 		common: '/js/common/common',
 		courseAdd: '/js/course/add',
 		addStep1: '/js/course/add_step1',
@@ -31,7 +35,10 @@ requirejs.config({
 		}
 	}
 });
-require(['jquery','bootstrap','common']);
+require(['nprogress'],function (NProgress) {
+	NProgress.start();
+});
+require(['jquery','bootstrap']);
 
 //根据URL中路径名加载不用的js文件
 (function (window) {
@@ -46,6 +53,9 @@ require(['jquery','bootstrap','common']);
 			window.location.href = '/html/home/login.html';
 		}
 		switch (pathname) {
+			case "/" :
+				require(['index']);
+				break;
 			/*------------crouse-------------------*/
 			case "/html/course/add.html" :
 				require(['courseAdd']);
