@@ -12,6 +12,7 @@ requirejs.config({
 		template: './lib/artTemplate-3.0.1/template',
 
 		//自己写的js文件
+		util: './js/common/util',
 		index: './js/index',
 		common: '/js/common/common',
 		courseAdd: '/js/course/add',
