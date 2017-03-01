@@ -41,6 +41,11 @@ define(['jquery','common','nprogress','util','template'],function ($, undefined,
 		})
 		return false;
 	})
+	/*
+	* 讲师搜索功能
+	* */
+
+
 	//加载页面完毕
 	NProgress.done();
 })

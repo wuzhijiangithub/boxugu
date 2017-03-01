@@ -3,7 +3,7 @@
  */
 define(['jquery','common','nprogress','template'],function ($, undefined, NProgress, template) {
 	/*讲师列表缓存*/
-	var teacherListCache = localStorage.getItem('teacherListCache');
+	var teacherListCache = undefined;
 	teacherListCache = undefined;
 	if(teacherListCache){
 		$('#teacher-list-tbody').html(teacherListCache);
@@ -12,12 +12,11 @@ define(['jquery','common','nprogress','template'],function ($, undefined, NProgr
 		$.get('/v6/teacher',function (data) {
 			if(data.code == 200){
 				var html = template('teacher-list-tpl', data);
-				localStorage.setItem('teacherListCache', html);
+				teacherListCache = JSON.stringify(data.result);
 				$('#teacher-list-tbody').html(html);
 			}
 		});
 	}
-
 
 	/*
 	*查看讲师信息
@@ -47,6 +46,35 @@ define(['jquery','common','nprogress','template'],function ($, undefined, NProgr
 			}
 
 		});
+	});
+
+	/*
+	* 搜索指定讲师
+	* */
+	$('.teacher-search-btn').on('click', function () {
+		var keyWord = $('.teacher-search-input').val();
+		var reg = new RegExp(keyWord);
+		var dataArr =[];
+
+
+		var teacherData = {};
+		try {
+			 teacherData = JSON.parse(teacherListCache);
+
+		}catch (e){};
+		for(var i=0, len = teacherData.length; i < len; i++) {
+			//如果姓名和手机号中任一符合则显示
+			if(reg.test(teacherData[i].tc_name) || reg.test(teacherData[i].tc_cellphone)) {
+				dataArr.push(teacherData[i]);
+			}
+
+		}
+		var html = template('teacher-list-tpl', {
+			result: dataArr
+		});
+		console.log(dataArr);
+		$('#teacher-list-tbody').html(html);
+		return false;
 	})
 
 
