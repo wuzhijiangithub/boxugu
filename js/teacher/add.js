@@ -19,21 +19,28 @@ define(['jquery','common','nprogress','util','template'],function ($, undefined,
 
 	}else {
 		/*
-		 * 添加讲师
+		 * 显示添加讲师表单
 		 * */
 		var html = template('teacher-add-tpl', {});
-		console.log(html);
 		$("#teacher-add-form").html(html);
-		$('#teacher-add-form').on('submit', function () {
 
-			$.post('/v6/teacher/add', $('#teacher-add-form').serialize(), function (data) {
-				if(data.code == 200){
-					window.location.href = '/html/teacher/list.html'
-				}
-			});
-			return false;
-		})
 	}
+	/*
+	* 添加教师&修改讲师资料
+	* */
+	$('#teacher-add-form').on('submit', function () {
+		$.ajax({
+			url: '/v6/teacher/'+(teacherId? "update": "add"),
+			type: 'post',
+			data: $(this).serialize() + (teacherId ? "&tc_id="+teacherId : ""),
+			success: function (data) {
+				window.location.href = '/html/teacher/list.html'
+
+			}
+
+		})
+		return false;
+	})
 	//加载页面完毕
 	NProgress.done();
 })
