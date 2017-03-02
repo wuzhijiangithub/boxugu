@@ -1,8 +1,8 @@
 /**
  * Created by MF on 2017/2/25.
  */
-define(['jquery','common','nprogress','util','template'],function ($, undefined, NProgress, util, template) {
-
+define(['jquery','common','nprogress','util','template', 'datepicker', 'localeDatepicker','datepicker', 'localeDatepicker']
+	,function ($, undefined, NProgress, util, template, datepicker, undefined) {
 	/*
 	* 修改讲师
 	* */
@@ -14,6 +14,12 @@ define(['jquery','common','nprogress','util','template'],function ($, undefined,
 			if(data.code == 200){
 				var html = template('teacher-add-tpl', data.result);
 				$("#teacher-add-form").html(html);
+				$('#teacher-join-date').datepicker({
+					language: 'zh-CN',
+					format: 'yyyy-mm-dd',
+					startDate: '2016-01-01',
+					endDate: new Date().toLocaleDateString().split('/').join("-"),
+				});
 			}
 		});
 
@@ -23,6 +29,13 @@ define(['jquery','common','nprogress','util','template'],function ($, undefined,
 		 * */
 		var html = template('teacher-add-tpl', {});
 		$("#teacher-add-form").html(html);
+		$('#teacher-join-date').datepicker({
+			language: 'zh-CN',
+			format: 'yyyy-mm-dd',
+			startDate: '2016-01-01',
+			endDate: new Date().toLocaleDateString().split('/').join("-"),
+
+		});
 
 	}
 	/*
@@ -41,9 +54,10 @@ define(['jquery','common','nprogress','util','template'],function ($, undefined,
 		})
 		return false;
 	})
-	/*
-	* 讲师搜索功能
-	* */
+		/*
+		* 日期控件
+		* */
+		console.log($('#teacher-join-date').datepicker);
 
 
 	//加载页面完毕

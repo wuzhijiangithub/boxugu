@@ -10,6 +10,9 @@ requirejs.config({
 		bootstrap: './lib/bootstrap/js/bootstrap',
 		nprogress: './lib/nprogress/nprogress',
 		template: './lib/artTemplate-3.0.1/template',
+		datepicker: './lib/bootstrap-datepicker/js/bootstrap-datepicker',
+		localeDatepicker: './lib/bootstrap-datepicker/locales/bootstrap-datepicker.zh-CN.min',
+
 
 		//自己写的js文件
 		util: './js/common/util',
@@ -34,7 +37,11 @@ requirejs.config({
 	shim: {
 		bootstrap: {
 			deps: ['jquery']
+		},
+		localeDatepicker: {
+			deps: ['jquery','datepicker']
 		}
+
 	}
 });
 require(['nprogress'],function (NProgress) {
